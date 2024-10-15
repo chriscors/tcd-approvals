@@ -9,7 +9,7 @@
   // @generated
   // prettier-ignore
   /* eslint-disable */
-  export const ZTCDDelete = z.object({
+  export const Ztimecard = z.object({
       "__id": z.string(),
       "contractName": z.string(),
       "date": z.string(),
@@ -20,9 +20,9 @@
       "TCD_CLL_VEN__Venue::Code": z.string(),
       "TCD_COJ__ContactJoin::Payroll_id": z.string(),
       "Note": z.string(),
-      "TCD_TCL__TimeCardLine.bill::hrsColumn0_s": z.union([z.string(), z.number()]),
-      "TCD_TCL__TimeCardLine.bill::hrsColumn1_s": z.union([z.string(), z.number()]),
-      "TCD_TCL__TimeCardLine.bill::hrsColumn2_s": z.union([z.string(), z.number()]),
+      "TCD_RAT__Rating::name": z.string(),
+      "TCD_CJT__ContractJobTitle::Name": z.string(),
+      "TCD_DEP__Department::name": z.string(),
   });
 
-  export type TTCDDelete = z.infer<typeof ZTCDDelete>;
+  export type Ttimecard = z.infer<typeof Ztimecard>;

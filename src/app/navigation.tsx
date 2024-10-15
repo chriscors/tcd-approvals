@@ -7,6 +7,11 @@ export const primaryRoutes: ProofKitRoute[] = [
     href: "/",
     exactMatch: true,
   },
+  {
+    label: "undefined",
+    type: "link",
+    href: "/timecard",
+  },
 ];
 
 export const secondaryRoutes: ProofKitRoute[] = [];

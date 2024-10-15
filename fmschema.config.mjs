@@ -3,8 +3,13 @@ export const config = {
   clientSuffix: "Layout",
   schemas: [
     {
-      layout: "api.TCD__TimeCard",
-      schemaName: "TCDDelete",
+      layout: "next.TCD__TimeCard",
+      schemaName: "timecard",
+      valueLists: "allowEmpty",
+    },
+    {
+      layout: "next.TCL__TimeCardLine",
+      schemaName: "timecardline",
       valueLists: "allowEmpty",
     },
   ],
