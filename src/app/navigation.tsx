@@ -8,9 +8,9 @@ export const primaryRoutes: ProofKitRoute[] = [
     exactMatch: true,
   },
   {
-    label: "undefined",
+    label: "approve",
     type: "link",
-    href: "/timecard",
+    href: "/approve",
   },
 ];
 
