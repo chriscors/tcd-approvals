@@ -11,13 +11,15 @@
   /* eslint-disable */
   export const Ztimecardline = z.object({
       "__id": z.string(),
-      "hrsUnworked": z.string(),
+      "hrsUnworked_num_c": z.union([z.string(), z.number()]),
       "time_in": z.string(),
       "time_out": z.string(),
-      "hrsWorked_c": z.string(),
+      "hrsWorked_num_c": z.union([z.string(), z.number()]),
       "TCL_EVS__EventSchedule::vl_display_evs_c": z.string(),
       "TCL_CJT__ContractJobTitle::Name": z.string(),
       "display_modifiers_c": z.string(),
+      "isPay": z.union([z.string(), z.number()]),
+      "_timecard_id": z.string(),
   });
 
   export type Ttimecardline = z.infer<typeof Ztimecardline>;
