@@ -32,44 +32,56 @@ export default async function TablePage({
   const date = dayjs(tcdData.fieldData.date).format("dddd, MMMM D, YYYY");
 
   return (
-    <Stack gap={"lg"}>
-      <Card shadow="sm" padding="lg" radius="md" withBorder>
-        <Stack gap={"md"}>
-          <Stack gap={"xs"}>
-            <Title order={2}>
-              {tcdData.fieldData["TCD_CON__Contact::Name_Full_lfm_c"]}
-            </Title>
-            <Title order={5} my={0} c={"gray"}>
-              {date}
-            </Title>
-          </Stack>
-          {/* Details Grid */}
-          <Grid>
-            <GridCol span={6}>
-              <Group gap="xl">
-                <Box>
-                  <Text size="sm" fw={500} c="dimmed">
-                    Rating
-                  </Text>
-                  <Text>{tcdData.fieldData["TCD_RAT__Rating::name"]}</Text>
-                </Box>
-              </Group>
-            </GridCol>
-
-            <GridCol span={6}>
-              <Group gap="xl">
-                <Box>
-                  <Text size="sm" fw={500} c="dimmed">
-                    Department
-                  </Text>
-                  <Text>{tcdData.fieldData["TCD_DEP__Department::name"]}</Text>
-                </Box>
-              </Group>
-            </GridCol>
-          </Grid>
+    <Card shadow="sm" padding="lg" radius="md" withBorder>
+      <Stack gap={"md"}>
+        <Stack gap={"xs"}>
+          <Title order={2}>
+            {tcdData.fieldData["TCD_CON__Contact::Name_Full_lfm_c"]}
+          </Title>
+          <Title order={5} my={0} c={"gray"}>
+            {date}
+          </Title>
         </Stack>
-      </Card>
-      <TableContent data={tclData.map((d) => d.fieldData)} />
-    </Stack>
+        {/* Details Grid */}
+        <Grid grow>
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Rating
+              </Text>
+              <Text>{tcdData.fieldData["TCD_RAT__Rating::name"]}</Text>
+            </Box>
+          </GridCol>
+
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Department
+              </Text>
+              <Text>{tcdData.fieldData["TCD_DEP__Department::name"]}</Text>
+            </Box>
+          </GridCol>
+
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Venue
+              </Text>
+              <Text>{tcdData.fieldData["TCD_CLL_VEN__Venue::Name"]}</Text>
+            </Box>
+          </GridCol>
+
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Contract
+              </Text>
+              <Text>{tcdData.fieldData.contractName}</Text>
+            </Box>
+          </GridCol>
+        </Grid>
+        <TableContent data={tclData.map((d) => d.fieldData)} />
+      </Stack>
+    </Card>
   );
 }

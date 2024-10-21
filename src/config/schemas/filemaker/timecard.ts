@@ -24,6 +24,7 @@
       "TCD_CJT__ContractJobTitle::Name": z.string(),
       "TCD_DEP__Department::name": z.string(),
       "TCD_RTC__RateCard::name": z.string(),
+      "TCD_CLL_VEN__Venue::Name": z.string(),
   });
 
   export type Ttimecard = z.infer<typeof Ztimecard>;
