@@ -11,12 +11,14 @@ import {
   Title,
   Grid,
   GridCol,
+  Badge,
 } from "@mantine/core";
-import React from "react";
 
 import TableContent from "./table";
 import dayjs from "dayjs";
-export default async function TablePage({
+import { ApprovalButtons } from "@/components/ApprovalButtons";
+
+export default async function ApprovalPage({
   params,
 }: {
   params: { timecard_id: string };
@@ -30,14 +32,20 @@ export default async function TablePage({
     fetch: { next: { revalidate: 0 } },
   });
   const date = dayjs(tcdData.fieldData.date).format("dddd, MMMM D, YYYY");
-
+  console.log(tcdData.fieldData);
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap={"md"}>
         <Stack gap={"xs"}>
-          <Title order={2}>
-            {tcdData.fieldData["TCD_CON__Contact::Name_Full_lfm_c"]}
-          </Title>
+          <Group justify="space-between">
+            <Title order={2}>
+              {tcdData.fieldData["TCD_CON__Contact::Name_Full_lfm_c"]}
+            </Title>
+            <ApprovalBadge
+              status={tcdData.fieldData.employeeApproved as number}
+              size="lg"
+            />
+          </Group>
           <Title order={5} my={0} c={"gray"}>
             {date}
           </Title>
@@ -81,7 +89,41 @@ export default async function TablePage({
           </GridCol>
         </Grid>
         <TableContent data={tclData.map((d) => d.fieldData)} />
+        {tcdData.fieldData.employeeApproved === 0 ? (
+          <ApprovalButtons tcdId={params.timecard_id} />
+        ) : (
+          <Group justify="flex-end">
+            <ApprovalBadge
+              status={tcdData.fieldData.employeeApproved as number}
+              size="lg"
+            />
+          </Group>
+        )}
       </Stack>
     </Card>
   );
+}
+
+function ApprovalBadge({
+  status,
+  size = "lg",
+}: {
+  status: number;
+  size?: "lg" | "md" | "sm";
+}) {
+  if (status === 1) {
+    return (
+      <Badge variant="light" size={size} color="green">
+        Approved
+      </Badge>
+    );
+  } else if (status === -1) {
+    return (
+      <Badge variant="light" size={size} color="red">
+        Rejected
+      </Badge>
+    );
+  } else {
+    return null;
+  }
 }
