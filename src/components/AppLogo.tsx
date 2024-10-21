@@ -3,5 +3,5 @@ import { IconInfinity } from "@tabler/icons-react";
 import React from "react";
 
 export default function AppLogo() {
-  return <Image src="Ordway_Black.jpg " />;
+  return <Image src="/Ordway_Black.jpg" mah={32} />;
 }
