@@ -71,13 +71,10 @@ const columns: MRT_ColumnDef<TData>[] = [
             <Text size="sm" fw={500} c="dimmed">
               Position
             </Text>
-            <Text>
-              {row.original["TCL_CJT__ContractJobTitle::Name"]}
-
-              <Badge variant="light" ml={"sm"}>
-                {row.original["TCL_RTC__RateCard::name"]}
-              </Badge>
-            </Text>
+            <Text>{row.original["TCL_CJT__ContractJobTitle::Name"]}</Text>
+            <Badge variant="light" ml={"sm"}>
+              {row.original["TCL_RTC__RateCard::name"]}
+            </Badge>
           </Box>
         </Box>
       );
