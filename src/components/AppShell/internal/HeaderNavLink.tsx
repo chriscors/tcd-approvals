@@ -28,4 +28,5 @@ export default function HeaderNavLink(route: ProofKitRoute) {
       </a>
     );
   }
+  return null;
 }

@@ -1,18 +1,18 @@
 import { Text } from "@mantine/core";
 import { IconExclamationCircle } from "@tabler/icons-react";
-import { TablerIconsProps } from "@tabler/icons-react";
+import { Icon } from "@tabler/icons-react";
 export function DataWithIcon(
   props: React.PropsWithChildren<{
     value?: string;
     iconColor?: string;
-    icon: (props: TablerIconsProps) => JSX.Element;
+    icon: (props: Icon) => JSX.Element;
     hasChanged?: boolean;
     weight?: number;
-  }>,
+  }>
 ) {
   return (
     <Text
-      sx={{
+      style={{
         display: "inline-flex",
         alignItems: "flex-start",
         gap: 8,
