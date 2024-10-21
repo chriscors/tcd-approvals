@@ -92,6 +92,9 @@ export default function MyTable({ data }: { data: TData[] }) {
     {
       id: "pay",
       header: "Pay",
+      mantineTableBodyCellProps: {
+        style: { verticalAlign: "top" },
+      },
       Cell: ({ row }) => {
         return (
           <Box>
@@ -137,7 +140,6 @@ export default function MyTable({ data }: { data: TData[] }) {
       ),
     },
   ];
-  console.log(data);
 
   const table = useMantineReactTable({
     data,
