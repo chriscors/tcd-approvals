@@ -25,6 +25,8 @@
       "TCD_DEP__Department::name": z.string(),
       "TCD_RTC__RateCard::name": z.string(),
       "TCD_CLL_VEN__Venue::Name": z.string(),
+      "employeeApproved": z.union([z.string(), z.number()]),
+      "employeeApprovalNote": z.string(),
   });
 
   export type Ttimecard = z.infer<typeof Ztimecard>;

@@ -15,9 +15,5 @@ import {
 import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 
 export default function Home() {
-  return (
-    <>
-      
-    </>
-  );
+  return <></>;
 }

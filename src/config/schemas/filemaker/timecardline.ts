@@ -23,6 +23,7 @@
       "TCL_RTC__RateCard::name": z.string(),
       "rateFinal_c": z.union([z.string(), z.number()]),
       "dollarsTotalPay_c": z.union([z.string(), z.number()]),
+      "TCL_EVS_EVE__Event::Name": z.string(),
   });
 
   export type Ttimecardline = z.infer<typeof Ztimecardline>;
