@@ -9,7 +9,7 @@ import {
 import React, { useMemo } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Badge, Box, Text } from "@mantine/core";
+import { Badge, Box, Group, Text } from "@mantine/core";
 
 dayjs.extend(customParseFormat);
 
@@ -70,20 +70,19 @@ export default function MyTable({ data }: { data: TData[] }) {
             {Time}
             <Box>
               <Text size="sm" fw={500} c="dimmed">
-                Call
+                Event
               </Text>
-              <Text>
-                {row.original["TCL_EVS__EventSchedule::vl_display_evs_c"]}
-              </Text>
+              <Text>{row.original["TCL_EVS_EVE__Event::Name"]}</Text>
             </Box>
             <Box>
-              <Text size="sm" fw={500} c="dimmed">
-                Position
-              </Text>
-              <Text>{row.original["TCL_CJT__ContractJobTitle::Name"]}</Text>
-              <Badge variant="light" ml={"sm"}>
-                {row.original["TCL_RTC__RateCard::name"]}
-              </Badge>
+              <Group gap={"xs"}>
+                <Badge variant="dot">
+                  {row.original["TCL_CJT__ContractJobTitle::Name"]}
+                </Badge>
+                <Badge variant="light">
+                  {row.original["TCL_RTC__RateCard::name"]}
+                </Badge>
+              </Group>
             </Box>
           </Box>
         );
