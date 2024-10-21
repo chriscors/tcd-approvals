@@ -8,7 +8,7 @@ export function DataWithIcon(
     icon: (props: TablerIconsProps) => JSX.Element;
     hasChanged?: boolean;
     weight?: number;
-  }>
+  }>,
 ) {
   return (
     <Text
