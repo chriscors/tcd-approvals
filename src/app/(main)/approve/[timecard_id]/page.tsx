@@ -43,34 +43,41 @@ export default async function TablePage({
           </Title>
         </Stack>
         {/* Details Grid */}
-        <Grid>
-          <GridCol span={6}>
-            <Group gap="xl">
-              <Box>
-                <Text size="sm" fw={500} c="dimmed">
-                  Contract
-                </Text>
-                <Text>{tcdData.fieldData.contractName}</Text>
-              </Box>
-
-              <Box>
-                <Text size="sm" fw={500} c="dimmed">
-                  Rating
-                </Text>
-                <Text>{tcdData.fieldData["TCD_RAT__Rating::name"]}</Text>
-              </Box>
-            </Group>
+        <Grid grow>
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Rating
+              </Text>
+              <Text>{tcdData.fieldData["TCD_RAT__Rating::name"]}</Text>
+            </Box>
           </GridCol>
 
-          <GridCol span={6}>
-            <Group gap="xl">
-              <Box>
-                <Text size="sm" fw={500} c="dimmed">
-                  Department
-                </Text>
-                <Text>{tcdData.fieldData["TCD_DEP__Department::name"]}</Text>
-              </Box>
-            </Group>
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Department
+              </Text>
+              <Text>{tcdData.fieldData["TCD_DEP__Department::name"]}</Text>
+            </Box>
+          </GridCol>
+
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Venue
+              </Text>
+              <Text>{tcdData.fieldData["TCD_CLL_VEN__Venue::Name"]}</Text>
+            </Box>
+          </GridCol>
+
+          <GridCol span={{ base: 6, md: 3 }}>
+            <Box>
+              <Text size="sm" fw={500} c="dimmed">
+                Contract
+              </Text>
+              <Text>{tcdData.fieldData.contractName}</Text>
+            </Box>
           </GridCol>
         </Grid>
         <TableContent data={tclData.map((d) => d.fieldData)} />
