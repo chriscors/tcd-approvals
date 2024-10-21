@@ -20,6 +20,7 @@ export default function HeaderNavLink(route: ProofKitRoute) {
   if (route.type === "link") {
     return (
       <a
+        
         href={route.href}
         className={classes.link}
         data-active={isActive || undefined}

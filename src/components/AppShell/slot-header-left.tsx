@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 
 import AppLogo from "../AppLogo";
 
@@ -13,9 +13,9 @@ import AppLogo from "../AppLogo";
 export function SlotHeaderLeft() {
   return (
     <>
-      <Link href="/" style={{ display: "inline-flex", alignItems: "center" }}>
-        <AppLogo />
-      </Link>
+      {/* <Link href="/" style={{ display: "inline-flex", alignItems: "center" }}> */}
+      <AppLogo />
+      {/* </Link> */}
     </>
   );
 }

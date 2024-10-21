@@ -2,10 +2,10 @@ import { Box, Container, Group } from "@mantine/core";
 
 import SlotHeaderCenter from "../slot-header-center";
 import SlotHeaderLeft from "../slot-header-left";
-import SlotHeaderRight from "../slot-header-right";
+// import SlotHeaderRight from "../slot-header-right";
 import { headerHeight } from "./config";
 import classes from "./Header.module.css";
-import HeaderMobileMenu from "./HeaderMobileMenu";
+// import HeaderMobileMenu from "./HeaderMobileMenu";
 
 export function Header() {
   return (
@@ -21,12 +21,12 @@ export function Header() {
           <Box visibleFrom="md">
             <SlotHeaderCenter />
           </Box>
-          <Box visibleFrom="md">
+          {/* <Box visibleFrom="md">
             <SlotHeaderRight />
           </Box>
           <Box hiddenFrom="md">
             <HeaderMobileMenu />
-          </Box>
+          </Box> */}
         </Group>
       </Container>
     </header>

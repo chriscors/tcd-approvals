@@ -72,10 +72,8 @@ export default function MyTable({ data }: { data: TData[] }) {
               <Text size="sm" fw={500} c="dimmed">
                 Event
               </Text>
-              <Text>{row.original["TCL_EVS_EVE__Event::Name"]}</Text>
-            </Box>
-            <Box>
               <Group gap={"xs"}>
+                <Text>{row.original["TCL_EVS_EVE__Event::Name"]}</Text>
                 <Badge variant="dot">
                   {row.original["TCL_CJT__ContractJobTitle::Name"]}
                 </Badge>
