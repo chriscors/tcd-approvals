@@ -14,7 +14,7 @@
       "contractName": z.string(),
       "date": z.string(),
       "status": z.union([z.string(), z.number()]),
-      "TCD_CON__Contact::Name_Full_lfm_c": z.string(),
+      "TCD_CON__Contact::Name_Full_nl_c": z.string(),
       "hrsUnworked": z.union([z.string(), z.number()]),
       "hrsWorked": z.union([z.string(), z.number()]),
       "TCD_CLL_VEN__Venue::Code": z.string(),

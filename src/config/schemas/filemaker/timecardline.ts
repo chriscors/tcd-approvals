@@ -24,6 +24,7 @@
       "rateFinal_c": z.union([z.string(), z.number()]),
       "dollarsTotalPay_c": z.union([z.string(), z.number()]),
       "TCL_EVS_EVE__Event::Name": z.string(),
+      "multiplier_final_rate_c": z.union([z.string(), z.number()]),
   });
 
   export type Ttimecardline = z.infer<typeof Ztimecardline>;
