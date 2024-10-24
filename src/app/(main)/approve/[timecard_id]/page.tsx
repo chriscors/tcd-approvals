@@ -37,9 +37,9 @@ export default async function ApprovalPage({
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap={"md"}>
         <Stack gap={"xs"}>
-          <Group justify="space-between">
+          <Group justify="space-between" gap={"xs"}>
             <Title order={2}>
-              {tcdData.fieldData["TCD_CON__Contact::Name_Full_lfm_c"]}
+              {tcdData.fieldData["TCD_CON__Contact::Name_Full_nl_c"]}
             </Title>
             <ApprovalBadge
               status={tcdData.fieldData.employeeApproved as number}
