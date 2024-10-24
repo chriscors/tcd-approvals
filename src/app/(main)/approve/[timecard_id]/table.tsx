@@ -9,7 +9,7 @@ import {
 import React, { useMemo } from "react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Badge, Box, Group, Text } from "@mantine/core";
+import { Badge, Box, Grid, GridCol, Group, Text } from "@mantine/core";
 
 dayjs.extend(customParseFormat);
 
@@ -22,67 +22,49 @@ export default function MyTable({ data }: { data: TData[] }) {
   }, [data]);
 
   const columns: MRT_ColumnDef<TData>[] = [
-    // {
-    //   header: "Hours",
-    //   id: "time",
-    //   Cell: ({ row }) => {
-    //     const timeIn = dayjs(row.original.time_in, "HH:mm:ss").format("h:mm A");
-    //     const timeOut = dayjs(row.original.time_out, "HH:mm:ss").format("h:mm A");
-    //     return timeIn === "Invalid Date" ? (
-    //       ""
-    //     ) : (
-    //       <Box>
-    //         <Box>
-    //           <Text size="sm" fw={500} c="dimmed">
-    //             Time In
-    //           </Text>
-    //           <Text>{`${timeIn} - ${timeOut}`}</Text>
-    //         </Box>
-
-    //       </Box>
-    //     );
-    //   },
-    // },
     {
       id: "job",
 
       header: "Job",
+      mantineTableBodyCellProps: {
+        style: { verticalAlign: "top" },
+      },
       Cell: ({ row }) => {
+        console.log(row.original);
         const timeIn = dayjs(row.original.time_in, "HH:mm:ss").format("h:mm A");
         const timeOut = dayjs(row.original.time_out, "HH:mm:ss").format(
           "h:mm A"
         );
-        const Time =
-          timeIn === "Invalid Date" ? (
-            ""
-          ) : (
-            <Box>
+        const time =
+          timeIn === "Invalid Date" ? "N/A" : `${timeIn} - ${timeOut}`;
+
+        return (
+          <Grid>
+            <GridCol span={{ base: 12, md: 4 }}>
               <Box>
                 <Text size="sm" fw={500} c="dimmed">
                   Time In
                 </Text>
-                <Text>{`${timeIn} - ${timeOut}`}</Text>
+                <Text>{time}</Text>
               </Box>
-            </Box>
-          );
-        return (
-          <Box>
-            {Time}
-            <Box>
-              <Text size="sm" fw={500} c="dimmed">
-                Event
-              </Text>
-              <Group gap={"xs"}>
-                <Text>{row.original["TCL_EVS_EVE__Event::Name"]}</Text>
-                <Badge variant="dot">
-                  {row.original["TCL_CJT__ContractJobTitle::Name"]}
-                </Badge>
-                <Badge variant="light">
-                  {row.original["TCL_RTC__RateCard::name"]}
-                </Badge>
-              </Group>
-            </Box>
-          </Box>
+            </GridCol>
+            <GridCol span={{ base: 12, md: 8 }}>
+              <Box>
+                <Text size="sm" fw={500} c="dimmed">
+                  Event
+                </Text>
+                <Group gap={"xs"}>
+                  <Text span>{row.original["TCL_EVS_EVE__Event::Name"]}</Text>
+                  <Badge variant="dot">
+                    {row.original["TCL_CJT__ContractJobTitle::Name"]}
+                  </Badge>
+                  <Badge variant="light">
+                    {row.original["TCL_RTC__RateCard::name"]}
+                  </Badge>
+                </Group>
+              </Box>
+            </GridCol>
+          </Grid>
         );
       },
     },
@@ -94,46 +76,70 @@ export default function MyTable({ data }: { data: TData[] }) {
       },
       Cell: ({ row }) => {
         return (
-          <Box>
+          <Grid>
             {row.original.hrsWorked_num_c && (
-              <Box>
+              <GridCol span={{ base: 12, sm: 6, md: 4 }}>
                 <Text size="sm" fw={500} c="dimmed">
                   Worked Hours
                 </Text>
-                <Text>{`${row.original.hrsWorked_num_c || 0}`}</Text>
-              </Box>
+                <Group gap={"xs"}>
+                  <Text>{`${row.original.hrsWorked_num_c || 0}`}</Text>
+                  <Badge variant="outline">
+                    {row.original.multiplier_final_rate_c}x
+                  </Badge>
+                  {row.original.display_modifiers_c && (
+                    <Badge variant="outline" color="orange">
+                      {row.original.display_modifiers_c}
+                    </Badge>
+                  )}
+                </Group>
+              </GridCol>
             )}
 
             {row.original.hrsUnworked_num_c && (
-              <Box display={"inline"}>
+              <GridCol span={{ base: 12, sm: 6, md: 4 }}>
                 <Text size="sm" fw={500} c="dimmed">
                   Unworked Hours
                 </Text>
-                <Text>{`${row.original.hrsUnworked_num_c}`}</Text>
-              </Box>
+                <Group gap={"xs"}>
+                  <Text>{`${row.original.hrsUnworked_num_c}`}</Text>
+                  <Badge variant="outline">
+                    {row.original.multiplier_final_rate_c}x
+                  </Badge>
+                  {row.original.display_modifiers_c && (
+                    <Badge variant="outline" color="orange">
+                      {row.original.display_modifiers_c}
+                    </Badge>
+                  )}
+                </Group>
+              </GridCol>
             )}
-            <Box>
+            <GridCol span={{ base: 12, sm: 6, md: 4 }}>
               <Text size="sm" fw={500} c="dimmed">
                 Rate
               </Text>
               <Text>${Number(row.original.rateFinal_c).toFixed(2)}</Text>
-            </Box>
-            <Box>
+            </GridCol>
+            <GridCol span={{ base: 12, sm: 6, md: 4 }}>
               <Text size="sm" fw={500} c="dimmed">
                 Pay
               </Text>
               <Text>${Number(row.original.dollarsTotalPay_c).toFixed(2)}</Text>
-            </Box>
-          </Box>
+            </GridCol>
+          </Grid>
         );
       },
       Footer: () => (
-        <Box>
-          <Text size="sm" fw={500} c="dimmed">
-            Total Pay
-          </Text>
-          <Text>${totalPay.toFixed(2)}</Text>
-        </Box>
+        <Grid>
+          <GridCol span={{ base: 12, sm: 6, md: 4 }} visibleFrom="md"></GridCol>
+          <GridCol span={{ base: 12, sm: 6, md: 4 }} visibleFrom="md"></GridCol>
+          <GridCol span={{ base: 12, sm: 6, md: 4 }}>
+            <Text size="sm" fw={500} c="dimmed">
+              Total Pay
+            </Text>
+            <Text>${totalPay.toFixed(2)}</Text>
+          </GridCol>
+        </Grid>
       ),
     },
   ];
