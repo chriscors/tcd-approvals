@@ -10,23 +10,34 @@ import { notifications } from "@mantine/notifications";
 import { fmsScripts } from "@/utils/constants";
 import { z } from "zod";
 import { createFormProvider } from "rhf-mantine";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export function ApprovalButtons({ tcdId }: { tcdId: string }) {
   const handleApprove = async () => {
+    notifications.show({
+      id: "approve-approval",
+      title: "Submitting",
+      message: "Please wait...",
+      loading: true,
+      color: "blue",
+    });
     const result = await approveTimecard(tcdId);
     if (!result.success) {
-      notifications.show({
+      notifications.update({
+        id: "approve-approval",
         title: "Error",
         message: result.error || "An unknown error occurred",
         color: "red",
+        loading: false,
       });
     } else {
-      notifications.show({
+      notifications.update({
+        id: "approve-approval",
         title: "Success",
         message: "Timecard approved",
         color: "green",
+        loading: false,
       });
     }
   };
@@ -70,6 +81,7 @@ function IssueModal({ tcdId }: { tcdId: string }) {
   });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    console.log(data);
     if (!data.comment) {
       notifications.show({
         title: "Error",
@@ -78,24 +90,40 @@ function IssueModal({ tcdId }: { tcdId: string }) {
       });
       return;
     }
+    notifications.show({
+      id: "reject-approval",
+      title: "Submitting",
+      message: "Please wait...",
+      loading: true,
+      color: "blue",
+    });
     const result = await declineTimecard(data.tcdId, data.comment);
+    console.log(result);
     if (!result.success) {
-      notifications.show({
+      notifications.update({
+        id: "reject-approval",
         title: "Error",
         message: result.error || "An unknown error occurred",
         color: "red",
+        loading: false,
       });
     } else {
-      notifications.show({
+      notifications.update({
+        id: "reject-approval",
         title: "Success",
-        message: "Timecard approved",
+        message: "Timecard rejected",
         color: "green",
-      });
+        loading: false,
+       });
     }
     closeModal(modalId);
   };
+
+  const onError = (errors: FieldErrors<FormValues>) => {
+    console.log(errors);
+  };
   return (
-    <Form {...form} onSubmit={onSubmit}>
+    <Form {...form} onSubmit={onSubmit} onError={onError}>
       <Stack>
         <Form.Textarea
           autoFocus
