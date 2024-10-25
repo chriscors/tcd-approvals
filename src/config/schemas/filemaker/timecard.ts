@@ -9,6 +9,10 @@
   // @generated
   // prettier-ignore
   /* eslint-disable */
+  export const ZVLApprovalStatuses = z.enum(["Not Sent", "Sent", "Undeliverable", "Approved", "Rejected"]);
+
+  export type TVLApprovalStatuses = z.infer<typeof ZVLApprovalStatuses>;
+
   export const Ztimecard = z.object({
       "__id": z.string(),
       "contractName": z.string(),
@@ -20,12 +24,11 @@
       "TCD_CLL_VEN__Venue::Code": z.string(),
       "TCD_COJ__ContactJoin::Payroll_id": z.string(),
       "Note": z.string(),
-      "TCD_RAT__Rating::name": z.string(),
       "TCD_CJT__ContractJobTitle::Name": z.string(),
       "TCD_DEP__Department::name": z.string(),
       "TCD_RTC__RateCard::name": z.string(),
       "TCD_CLL_VEN__Venue::Name": z.string(),
-      "employeeApprovalStatus": z.union([z.string(), z.number()]),
+      "employeeApprovalStatus": z.enum(["Not Sent", "Sent", "Undeliverable", "Approved", "Rejected"]),
   });
 
   export type Ttimecard = z.infer<typeof Ztimecard>;

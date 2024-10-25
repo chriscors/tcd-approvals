@@ -1,8 +1,4 @@
 import {
-  timecardLayout,
-  timecardlineLayout,
-} from "@/config/schemas/filemaker/client";
-import {
   Box,
   Card,
   Group,
@@ -29,6 +25,7 @@ export default async function ApprovalPage({
   if (!tcdData || !tclData) {
     return notFound();
   }
+
   const date = dayjs(tcdData.fieldData.date).format("dddd, MMMM D, YYYY");
   console.log(tcdData.fieldData);
   return (

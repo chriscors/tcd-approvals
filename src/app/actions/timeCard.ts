@@ -1,5 +1,6 @@
 "use server";
 
+
 import {
   timecardLayout,
   timecardlineLayout,
@@ -72,6 +73,7 @@ export async function getTimecard(tcdId: string) {
       query: [{ __id: tcdId }],
       fetch: { next: { revalidate: 0 } },
     });
+
     console.log(tclData, tcdData);
 
     return { tclData, tcdData };

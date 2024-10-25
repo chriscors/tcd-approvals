@@ -5,7 +5,7 @@ export const config = {
     {
       layout: "next.TCD__TimeCard",
       schemaName: "timecard",
-      valueLists: "allowEmpty",
+      valueLists: "strict",
     },
     {
       layout: "next.TCL__TimeCardLine",
