@@ -2,10 +2,7 @@
 
 import { closeModal, openModal } from "@mantine/modals";
 import { Button, Group, Stack } from "@mantine/core";
-import {
-  approveTimecard,
-  declineTimecard,
-} from "@/app/actions/approveTimecard";
+import { approveTimecard, declineTimecard } from "@/app/actions/timeCard";
 import { notifications } from "@mantine/notifications";
 import { fmsScripts } from "@/utils/constants";
 import { z } from "zod";
@@ -76,20 +73,10 @@ function IssueModal({ tcdId }: { tcdId: string }) {
     defaultValues: {
       action: "reject",
       tcdId,
-      comment: "",
     },
   });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log(data);
-    if (!data.comment) {
-      notifications.show({
-        title: "Error",
-        message: "Please provide a comment",
-        color: "red",
-      });
-      return;
-    }
     notifications.show({
       id: "reject-approval",
       title: "Submitting",
@@ -97,8 +84,7 @@ function IssueModal({ tcdId }: { tcdId: string }) {
       loading: true,
       color: "blue",
     });
-    const result = await declineTimecard(data.tcdId, data.comment);
-    console.log(result);
+    const result = await declineTimecard(data.tcdId, data.note || "");
     if (!result.success) {
       notifications.update({
         id: "reject-approval",
@@ -114,7 +100,7 @@ function IssueModal({ tcdId }: { tcdId: string }) {
         message: "Timecard rejected",
         color: "green",
         loading: false,
-       });
+      });
     }
     closeModal(modalId);
   };
@@ -125,11 +111,7 @@ function IssueModal({ tcdId }: { tcdId: string }) {
   return (
     <Form {...form} onSubmit={onSubmit} onError={onError}>
       <Stack>
-        <Form.Textarea
-          autoFocus
-          name="comment"
-          label="Please provide a comment"
-        />
+        <Form.Textarea autoFocus name="note" label="Please provide a comment" />
         <Group justify="right">
           <Button variant="subtle" onClick={() => closeModal(modalId)}>
             Cancel

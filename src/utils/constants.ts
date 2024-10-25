@@ -23,14 +23,16 @@ export type ErrorObject = z.infer<typeof errorObject>;
 export const fmsScripts = {
   submitApproval: {
     name: "Submit Approval",
-    input: z.object({
-      tcdId: z.string(),
-      action: z.enum(["approve", "reject"]),
-      comment: z.string().optional(),
-    }),
-    // .refine((val) => val.action === "reject" && !val.comment, {
-    //   message: "Please provide a comment",
-    // }),
+    input: z
+      .object({
+        tcdId: z.string(),
+        action: z.enum(["approve", "reject"]),
+        note: z.string().optional(),
+      })
+      .refine((val) => !(val.action === "reject" && !val.note), {
+        message: "Please provide a comment",
+        path: ["note"],
+      }),
     output: errorObject,
   },
 };
