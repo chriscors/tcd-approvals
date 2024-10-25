@@ -17,20 +17,18 @@ import {
 import TableContent from "./table";
 import dayjs from "dayjs";
 import { ApprovalButtons } from "@/components/ApprovalButtons";
+import { getTimecard } from "@/app/actions/timeCard";
+import { notFound } from "next/navigation";
 
 export default async function ApprovalPage({
   params,
 }: {
   params: { timecard_id: string };
 }) {
-  const { data: tclData } = await timecardlineLayout.find({
-    query: [{ _timecard_id: params.timecard_id, isPay: "1" }],
-    fetch: { next: { revalidate: 0 } },
-  });
-  const { data: tcdData } = await timecardLayout.findFirst({
-    query: [{ __id: params.timecard_id }],
-    fetch: { next: { revalidate: 0 } },
-  });
+  const { tclData, tcdData } = await getTimecard(params.timecard_id);
+  if (!tcdData || !tclData) {
+    return notFound();
+  }
   const date = dayjs(tcdData.fieldData.date).format("dddd, MMMM D, YYYY");
   console.log(tcdData.fieldData);
   return (
@@ -42,7 +40,7 @@ export default async function ApprovalPage({
               {tcdData.fieldData["TCD_CON__Contact::Name_Full_nl_c"]}
             </Title>
             <ApprovalBadge
-              status={tcdData.fieldData.employeeApproved as number}
+              status={tcdData.fieldData.employeeApprovalStatus}
               size="lg"
             />
           </Group>
@@ -89,13 +87,12 @@ export default async function ApprovalPage({
           </GridCol>
         </Grid>
         <TableContent data={tclData.map((d) => d.fieldData)} />
-        {tcdData.fieldData.employeeApproved === "" ||
-        tcdData.fieldData.employeeApproved === 0 ? (
+        {tcdData.fieldData.employeeApprovalStatus === "Sent" ? (
           <ApprovalButtons tcdId={params.timecard_id} />
         ) : (
           <Group justify="flex-end">
             <ApprovalBadge
-              status={tcdData.fieldData.employeeApproved as number}
+              status={tcdData.fieldData.employeeApprovalStatus}
               size="lg"
             />
           </Group>
@@ -109,22 +106,16 @@ function ApprovalBadge({
   status,
   size = "lg",
 }: {
-  status: number;
+  status: string;
   size?: "lg" | "md" | "sm";
 }) {
-  if (status === 1) {
-    return (
-      <Badge variant="light" size={size} color="green">
-        Approved
-      </Badge>
-    );
-  } else if (status === -1) {
-    return (
-      <Badge variant="light" size={size} color="red">
-        Rejected
-      </Badge>
-    );
-  } else {
-    return null;
-  }
+  return (
+    <Badge
+      variant="light"
+      size={size}
+      color={status === "Approved" ? "green" : "red"}
+    >
+      {status}
+    </Badge>
+  );
 }
