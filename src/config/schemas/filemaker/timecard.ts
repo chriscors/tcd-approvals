@@ -24,6 +24,7 @@
       "TCD_CLL_VEN__Venue::Code": z.string(),
       "TCD_COJ__ContactJoin::Payroll_id": z.string(),
       "Note": z.string(),
+      "TCD_RAT__Rating::name": z.string(),
       "TCD_CJT__ContractJobTitle::Name": z.string(),
       "TCD_DEP__Department::name": z.string(),
       "TCD_RTC__RateCard::name": z.string(),
