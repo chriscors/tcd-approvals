@@ -84,7 +84,7 @@ export default async function ApprovalPage({
           </GridCol>
         </Grid>
         <TableContent data={tclData.map((d) => d.fieldData)} />
-        {tcdData.fieldData.employeeApprovalStatus === "Sent" ? (
+        {tcdData.fieldData.employeeApprovalStatus === "Pending" ? (
           <ApprovalButtons tcdId={params.timecard_id} />
         ) : (
           <Group justify="flex-end">
