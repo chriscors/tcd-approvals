@@ -1,5 +1,9 @@
 "use server";
 
+import {
+  timecardLayout,
+  timecardlineLayout,
+} from "@/config/schemas/filemaker/client";
 import { runFMScript } from "@/server/fms";
 import { errorObject, fmsScripts } from "@/utils/constants";
 import { revalidatePath } from "next/cache";
@@ -31,12 +35,12 @@ export async function approveTimecard(tcdId: string) {
   }
 }
 
-export async function declineTimecard(tcdId: string, comment: string) {
+export async function declineTimecard(tcdId: string, note: string) {
   try {
     const result = await runFMScript(fmsScripts.submitApproval.name, {
       tcdId,
       action: "decline",
-      comment,
+      note,
     });
     const parsedResult = errorObject.safeParse(result);
 
@@ -55,5 +59,24 @@ export async function declineTimecard(tcdId: string, comment: string) {
   } catch (error) {
     console.error("Error declining timecard:", error);
     return { success: false, error: "Failed to decline timecard" };
+  }
+}
+
+export async function getTimecard(tcdId: string) {
+  try {
+    const { data: tclData } = await timecardlineLayout.find({
+      query: [{ _timecard_id: tcdId, isPay: "1" }],
+      fetch: { next: { revalidate: 0 } },
+    });
+    const { data: tcdData } = await timecardLayout.findFirst({
+      query: [{ __id: tcdId }],
+      fetch: { next: { revalidate: 0 } },
+    });
+    console.log(tclData, tcdData);
+
+    return { tclData, tcdData };
+  } catch (error) {
+    console.error("Error getting timecard:", error);
+    return { success: false, error: "Failed to get timecard" };
   }
 }
