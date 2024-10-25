@@ -9,7 +9,7 @@
   // @generated
   // prettier-ignore
   /* eslint-disable */
-  export const ZVLApprovalStatuses = z.enum(["Not Sent", "Sent", "Undeliverable", "Approved", "Rejected"]);
+  export const ZVLApprovalStatuses = z.enum(["Not Sent", "Sent", "Undeliverable", "Approved", "Rejected", "Pending"]);
 
   export type TVLApprovalStatuses = z.infer<typeof ZVLApprovalStatuses>;
 
@@ -29,7 +29,7 @@
       "TCD_DEP__Department::name": z.string(),
       "TCD_RTC__RateCard::name": z.string(),
       "TCD_CLL_VEN__Venue::Name": z.string(),
-      "employeeApprovalStatus": z.enum(["Not Sent", "Sent", "Undeliverable", "Approved", "Rejected"]),
+      "employeeApprovalStatus": z.enum(["Not Sent", "Sent", "Undeliverable", "Approved", "Rejected", "Pending"]),
   });
 
   export type Ttimecard = z.infer<typeof Ztimecard>;
