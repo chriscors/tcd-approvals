@@ -20,6 +20,6 @@
           db: process.env.FM_DATABASE,
           server: process.env.FM_SERVER,
       }),
-      layout: "Inbox",
+      layout: "WebInbox",
       zodValidators: { fieldData: ZInbox },
   });

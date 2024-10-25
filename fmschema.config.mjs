@@ -12,7 +12,7 @@ export const config = {
       schemaName: "timecardline",
       valueLists: "allowEmpty",
     },
-    { layout: "Inbox", schemaName: "Inbox", valueLists: "allowEmpty" },
+    { layout: "WebInbox", schemaName: "Inbox", valueLists: "allowEmpty" },
   ],
   cleanOldFiles: true,
   path: "./src/config/schemas/filemaker",

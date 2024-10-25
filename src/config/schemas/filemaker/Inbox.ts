@@ -10,16 +10,10 @@
   // prettier-ignore
   /* eslint-disable */
   export const ZInbox = z.object({
-      "CreatedBy": z.string(),
+      "scriptName": z.string(),
       "CreationTimestamp": z.string(),
       "inboxPayload": z.string(),
-      "ModificationTimestamp": z.string(),
-      "ModifiedBy": z.string(),
-      "ONE": z.union([z.string(), z.number()]),
-      "PrimaryKey": z.string(),
-      "scriptName": z.string(),
       "scriptResult": z.string(),
-      "ScriptStartTimestamp": z.string(),
   });
 
   export type TInbox = z.infer<typeof ZInbox>;
