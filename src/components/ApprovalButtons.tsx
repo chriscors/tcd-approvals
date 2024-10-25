@@ -2,7 +2,7 @@
 
 import { closeModal, openModal } from "@mantine/modals";
 import { Button, Group, Stack } from "@mantine/core";
-import { approveTimecard, declineTimecard } from "@/app/actions/timeCard";
+import { approveTimecard, rejectTimecard } from "@/app/actions/timeCard";
 import { notifications } from "@mantine/notifications";
 import { fmsScripts } from "@/utils/constants";
 import { z } from "zod";
@@ -84,7 +84,7 @@ function IssueModal({ tcdId }: { tcdId: string }) {
       loading: true,
       color: "blue",
     });
-    const result = await declineTimecard(data.tcdId, data.note || "");
+    const result = await rejectTimecard(data.tcdId, data.note || "");
     if (!result.success) {
       notifications.update({
         id: "reject-approval",

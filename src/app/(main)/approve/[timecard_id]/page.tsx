@@ -110,7 +110,9 @@ function ApprovalBadge({
     <Badge
       variant="light"
       size={size}
-      color={status === "Approved" ? "green" : "red"}
+      color={
+        status === "Approved" ? "green" : status === "Rejected" ? "red" : "gray"
+      }
     >
       {status}
     </Badge>

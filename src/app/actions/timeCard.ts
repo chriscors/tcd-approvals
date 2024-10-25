@@ -12,10 +12,11 @@ import { z } from "zod";
 
 export async function approveTimecard(tcdId: string) {
   try {
-    const result = await runFMScript(fmsScripts.submitApproval.name, {
+    const params: z.infer<typeof fmsScripts.submitApproval.input> = {
       tcdId,
       action: "approve",
-    });
+    };
+    const result = await runFMScript(fmsScripts.submitApproval.name, params);
     const parsedResult = errorObject.safeParse(result);
 
     if (!parsedResult.success) {
@@ -36,13 +37,14 @@ export async function approveTimecard(tcdId: string) {
   }
 }
 
-export async function declineTimecard(tcdId: string, note: string) {
+export async function rejectTimecard(tcdId: string, note: string) {
   try {
-    const result = await runFMScript(fmsScripts.submitApproval.name, {
+    const params: z.infer<typeof fmsScripts.submitApproval.input> = {
       tcdId,
-      action: "decline",
+      action: "reject",
       note,
-    });
+    };
+    const result = await runFMScript(fmsScripts.submitApproval.name, params);
     const parsedResult = errorObject.safeParse(result);
 
     if (!parsedResult.success) {
